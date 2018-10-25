@@ -48,7 +48,7 @@ router.route('/:id')
     })
     .delete((req, res) => {
         const { id } = req.params;
-        Hobbies.findByIdAndRemove(id)
+        Hobbies.findByIdAndDelete(id)
             .then(hobby => {
                 if (hobby === null) {
                     res.status(404).json({ errorMessage: `The hobby with id ${id} does not exist to delete.` })
@@ -66,9 +66,7 @@ router.route('/:id')
     })
     .put((req, res) => {
         const { id } = req.params;
-        const newHobby = (new Hobbies(
-            { name, progress, targetTime, resetEvery, onDays, addsToBreak, isActive, autoCompletes }
-            = req.body ));
+        const newHobby = ( { name, progress, targetTime, resetEvery, onDays, addsToBreak, isActive, autoCompletes } = req.body );
         Hobbies.findByIdAndUpdate(id, newHobby, {new: true})
             .then(hobby => {
                 if (hobby === null) {

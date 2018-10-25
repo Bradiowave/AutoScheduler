@@ -11,4 +11,4 @@ const HobbySchema = new mongoose.Schema({
     autoCompletes: Boolean
 });
 
-module.exports = mongoose.model('Hobby', Hobby);
+module.exports = mongoose.model('Hobby', HobbySchema);

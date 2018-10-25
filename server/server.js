@@ -20,7 +20,7 @@ server.use('/api/hobbies', hobbyRoutes);
 const port = process.env.PORT || 5000;
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/dbHobbies', {}, (error) => {
+mongoose.connect('mongodb://localhost/dbHobbies', { useNewUrlParser: true }, (error) => {
     if (error) console.log(error);
     else console.log('Mongoose connected us to dbHobbies');
 });
