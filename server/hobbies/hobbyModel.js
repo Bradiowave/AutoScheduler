@@ -6,9 +6,9 @@ const HobbySchema = new mongoose.Schema({
     targetTime: { type: String, required: true },
     resetEvery: { type: String, required: true },
     onDays: [Boolean],
-    addToBreak: Boolean,
+    addsToBreak: Boolean,
     isActive: Boolean,
-    autoComplete: Boolean
+    autoCompletes: Boolean
 });
 
 module.exports = mongoose.model('Hobby', Hobby);

@@ -6,15 +6,15 @@ hobby = {
     onDays: [1,1,1,1,1,1,1],
     addsToBreak: true,
     isActive: false,
-    autoComplete: false,
+    autoCompletes: false,
 }
 
-breakTime = {
-    progress: '00:00:00',
-    targetTime: '00:00:00',
-    toUse: '00:00:00',
-    resetEvery: '00:00:00',
-}
+// breakTime = {
+//     progress: '00:00:00',
+//     targetTime: '00:00:00',
+//     toUse: '00:00:00',
+//     resetEvery: '00:00:00',
+// }
 
 function getMillisecondsToMonday(){
     let now = new Date();
