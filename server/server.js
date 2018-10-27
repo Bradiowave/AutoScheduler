@@ -2,6 +2,8 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 const mongoose = require('mongoose');
+let dotenv = require ('dotenv');
+dotenv.load();
 
 const hobbyRoutes = require('./hobbies/hobbyRoutes.js');
 
