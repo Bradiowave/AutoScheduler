@@ -17,7 +17,7 @@ class App extends Component {
 
   componentDidMount () {
     axios.get('http://localhost:4088/api/hobbies')
-      .then(hobbies => {this.setState({hobbies: hobbies})})
+      .then(hobbies => {this.setState({hobbies: hobbies.data})})
       .catch(err => {console.log(err)})
   }
 

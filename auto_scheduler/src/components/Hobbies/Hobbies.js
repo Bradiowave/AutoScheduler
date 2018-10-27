@@ -6,8 +6,10 @@ import Hobby from '../Hobby/Hobby.js';
 const Hobbies = (props) => {
     return (
         <div className="hobbyCardsCollection">
-            {this.props.hobbies.map(hobby => (
-                <Hobby hobby={hobby} />
+            {props.hobbies.map(hobby => (
+                <div key={hobby._id}>
+                    <Hobby hobby={hobby} />
+                </div>
             ))}
         </div>
     )
