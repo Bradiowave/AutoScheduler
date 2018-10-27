@@ -19,6 +19,34 @@
    sodipodi:docname="Auto-Scheduler Mock Designs.svg">
   <defs
      id="defs2">
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lend"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path1376"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lstart"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path1373"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
     <pattern
        inkscape:stockid="Sand (bitmap)"
        id="sand_bitmap"
@@ -56,17 +84,17 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4142136"
-     inkscape:cx="1147.0428"
-     inkscape:cy="2330.3115"
+     inkscape:cx="1116.2666"
+     inkscape:cy="2238.7474"
      inkscape:document-units="px"
-     inkscape:current-layer="g1932"
+     inkscape:current-layer="g1968"
      showgrid="false"
      inkscape:showpageshadow="false"
      borderlayer="true"
      showborder="false"
      inkscape:window-width="1278"
      inkscape:window-height="1368"
-     inkscape:window-x="1273"
+     inkscape:window-x="-7"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
      inkscape:snap-bbox="true"
@@ -1924,7 +1952,7 @@
          height="99.21875"
          width="79.375"
          id="rect1956"
-         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.26458332;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.26458333;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
       <text
          id="text1962"
          y="-333.81235"
@@ -3413,27 +3441,53 @@
          inkscape:connector-curvature="0" />
     </g>
     <g
-       id="g1351"
-       transform="translate(-34.395832)"
-       style="fill:none">
-      <circle
-         r="3.9687335"
-         cy="-345.93753"
-         cx="343.95834"
-         id="path1342"
-         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.39687499;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-      <path
-         sodipodi:nodetypes="cc"
-         inkscape:connector-curvature="0"
-         id="path1344"
-         d="m 343.95834,-347.71498 v 3.55491"
-         style="fill:none;stroke:#000000;stroke-width:0.35548967px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      <path
-         sodipodi:nodetypes="cc"
-         inkscape:connector-curvature="0"
-         id="path1346"
-         d="m 342.18089,-345.93751 h 3.5549"
-         style="fill:none;stroke:#000000;stroke-width:0.35548967px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+       id="g1371">
+      <g
+         style="fill:#ffffff;opacity:0.5"
+         transform="translate(-34.395832)"
+         id="g1351">
+        <circle
+           style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.39687499;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           id="path1342"
+           cx="343.95834"
+           cy="-345.93753"
+           r="3.9687335" />
+        <path
+           style="fill:#ffffff;stroke:#000000;stroke-width:0.35548967px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m 343.95834,-347.71498 v 3.55491"
+           id="path1344"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="cc" />
+        <path
+           style="fill:#ffffff;stroke:#000000;stroke-width:0.35548967px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m 342.18089,-345.93751 h 3.5549"
+           id="path1346"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="cc" />
+      </g>
+      <g
+         id="g1361"
+         transform="translate(-34.395832)"
+         style="fill:none;opacity:1">
+        <circle
+           r="3.9687335"
+           cy="-345.93753"
+           cx="343.95834"
+           id="circle1355"
+           style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.39687499;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+        <path
+           sodipodi:nodetypes="cc"
+           inkscape:connector-curvature="0"
+           id="path1357"
+           d="m 343.95834,-347.71498 v 3.55491"
+           style="fill:none;stroke:#000000;stroke-width:0.35548967px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+        <path
+           sodipodi:nodetypes="cc"
+           inkscape:connector-curvature="0"
+           id="path1359"
+           d="m 342.18089,-345.93751 h 3.5549"
+           style="fill:none;stroke:#000000;stroke-width:0.35548967px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      </g>
     </g>
   </g>
 </svg>
