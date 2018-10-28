@@ -47,7 +47,7 @@ const Hobby = (props) => {
             <div className="hobbyHeader">
                 
                 <div className="playAndTitle">
-                    <button>▶</button>
+                    <button onClick={() => props.toggleHobbyIsActive(props.hobby._id)}>{props.hobby.isActive ? '⏹' : '▶'}</button>
                     <div className="hobbyTitle">{props.hobby.name}</div>
                 </div>
                 

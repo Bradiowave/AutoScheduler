@@ -20,13 +20,22 @@ class App extends Component {
       .catch(err => {console.log(err)})
   }
 
+  toggleHobbyIsActive = (hobby_id) => {
+    let index = this.state.hobbies.findIndex(obj => {
+      return obj._id === hobby_id;
+    })
+    let stateCopy = Object.assign({}, this.state)
+    stateCopy.hobbies[index].isActive = !stateCopy.hobbies[index].isActive;
+    this.setState(stateCopy);
+  }
+
   render() {
     return (
       <div className="App">
         <div>
           
           <Route path='/hobbies' render={ (props) => {
-            return (<Hobbies {...props} hobbies={this.state.hobbies} />)
+            return (<Hobbies {...props} hobbies={this.state.hobbies} toggleHobbyIsActive={this.toggleHobbyIsActive} />)
           }}/>
 
         </div>

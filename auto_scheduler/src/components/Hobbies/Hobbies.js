@@ -36,7 +36,7 @@ const Hobbies = (props) => {
             else if (isComplete) isCompleteArr.push(pureProgress[i]);
             else if (isDueToday) isDueTodayArr.push(pureProgress[i]);
             else if (notDueToday) notDueTodayArr.push(pureProgress[i]);
-            else notLockedArr.push(pureProgress[i])
+            else notLockedArr.push(pureProgress[i]);
         }
 
         return [].concat(isDueTodayArr, notLockedArr, notDueTodayArr, isCompleteArr, isLockedArr);
@@ -45,7 +45,7 @@ const Hobbies = (props) => {
     const populateActiveHobbies = () => {
         let arr = [];
         for (let i=0 ; i < props.hobbies.length ; i++){
-            if (props.hobbies[i].isActive) arr.push(props.hobbies[i])
+            if (props.hobbies[i].isActive) arr.push(props.hobbies[i]);
         }
 
         return orderArray(arr);
@@ -54,7 +54,7 @@ const Hobbies = (props) => {
     const populateInactiveHobbies = () => {
         let arr = [];
         for (let i=0 ; i < props.hobbies.length ; i++){
-            if (props.hobbies[i].isActive === false) arr.push(props.hobbies[i])
+            if (props.hobbies[i].isActive === false) arr.push(props.hobbies[i]);
         }
         
         return orderArray(arr);
@@ -65,18 +65,21 @@ const Hobbies = (props) => {
 
     return (
         <div className="hobbyCardsCollection">
+
             {activeHobbies.map(hobby => (
                 <div key={hobby._id}>
-                    <Hobby hobby={hobby} />
+                    <Hobby hobby={hobby} toggleHobbyIsActive={props.toggleHobbyIsActive} />
                 </div>
             ))}
+
             {inactiveHobbies.map(hobby => (
                 <div key={hobby._id}>
-                    <Hobby hobby={hobby} />
+                    <Hobby hobby={hobby} toggleHobbyIsActive={props.toggleHobbyIsActive} />
                 </div>
             ))}
+            
         </div>
     )
 }
 
-export default Hobbies
+export default Hobbies;
