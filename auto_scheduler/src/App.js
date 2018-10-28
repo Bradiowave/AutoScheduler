@@ -10,8 +10,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      hobbies: [],
-      activeHobbies: []
+      hobbies: []
     }
   }
 
@@ -27,7 +26,7 @@ class App extends Component {
         <div>
           
           <Route path='/hobbies' render={ (props) => {
-            return (<Hobbies {...props} activeHobbies={this.state.activeHobbies} hobbies={this.state.hobbies} />)
+            return (<Hobbies {...props} hobbies={this.state.hobbies} />)
           }}/>
 
         </div>

@@ -65,6 +65,7 @@
                 align-self: center;
                 font-size: 2.2rem;
                 padding-top: 5px;
+                z-index: 1;
             }
 
     .hobbyTimeBar{
