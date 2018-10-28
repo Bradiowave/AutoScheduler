@@ -24,7 +24,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className='hobbies'>
+        <div>
           
           <Route path='/hobbies' render={ (props) => {
             return (<Hobbies {...props} activeHobbies={this.state.activeHobbies} hobbies={this.state.hobbies} />)
