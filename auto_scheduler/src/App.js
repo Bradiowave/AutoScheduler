@@ -11,12 +11,23 @@ const stringToMS = (string) => {
   return((+timeParts[0] * (1000 * 60 * 60)) + (+timeParts[1] * 1000 * 60) + (+timeParts[2] * 1000));
 }
 
+const msToString = (duration) => {
+  let seconds = parseInt((duration / 1000) % 60);
+  let minutes = parseInt((duration / (1000 * 60)) % 60);
+  let hours = parseInt((duration / (1000 * 60 * 60)));
+
+  hours = (hours < 10) ? "0" + hours : hours;
+  minutes = (minutes < 10) ? "0" + minutes : minutes;
+  seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+  return hours + ":" + minutes + ":" + seconds;
+}
+
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      hobbies: [],
-      break: {},
+      hobbies: []
     }
   }
 
@@ -24,40 +35,42 @@ class App extends Component {
     axios.get('http://localhost:4088/api/hobbies')
       .then(hobbies => {
         this.setState({hobbies: hobbies.data});
-        this.setState({break: this.initializeBreak()});
+        this.setState(this.initializeBreak());
       })
       .catch(err => {console.log(err)});
   }
 
   initializeBreak () {
-    const name = "Break";
-    const color = "#ffff00";
-    let progress = '00:00:00';
-
     const findTargetTime = () => {
       let totalHobbyTime = 0;
       for (let i=0 ; i < this.state.hobbies.length ; i++) {
         let msPerWeek = 0;
         let obj = this.state.hobbies[i];
+        if (obj.name === "Break") continue;
         if (obj.onDays.length === 1) {
           if (obj.onDays[0] === 0) msPerWeek = stringToMS(obj.targetTime);
           else msPerWeek = stringToMS(obj.targetTime) * 7;
         }
         else {
           let numberOfDays = obj.onDays.reduce((accumulator, currentValue) => accumulator + currentValue);
-          console.log(numberOfDays);
           msPerWeek = stringToMS(obj.targetTime) * numberOfDays;
         }
-        console.log("msPerWeek", msPerWeek);
         totalHobbyTime += msPerWeek;
       }
-      console.log(totalHobbyTime);
       return (604800000 - totalHobbyTime);
     }
     let targetTime = findTargetTime();
+    targetTime = msToString(targetTime);
 
-    return {name, color, progress, targetTime};
+    let stateCopy = Object.assign({}, this.state)
+    let index = stateCopy.hobbies.findIndex(hobby => {
+      return hobby.name === "Break";
+    })
 
+    stateCopy.hobbies[index].targetTime = targetTime;
+    console.log(stateCopy.hobbies[index]);
+
+    return stateCopy;
   }
 
   toggleHobbyIsActive = (hobby_id) => {

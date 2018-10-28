@@ -78,4 +78,4 @@ const Hobby = (props) => {
     )
 }
 
-export default Hobby
+export default Hobby;

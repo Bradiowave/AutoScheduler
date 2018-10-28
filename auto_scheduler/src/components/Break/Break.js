@@ -1,16 +1,15 @@
 import React from 'react';
-import './Hobby.css';
+import './Break.css';
 
 const stringToMS = (string) => {
     let timeParts = string.split(":");
     return((+timeParts[0] * (1000 * 60 * 60)) + (+timeParts[1] * 1000 * 60) + (+timeParts[2] * 1000));
 }
 
-const Hobby = (props) => {
-
+const Break = (props) => {
     const determineClassName = () => {
         const percentDone = stringToMS(props.hobby.progress) / stringToMS(props.hobby.targetTime);
-        let className = props.hobby.autoCompletes ? 'hobbyCardLocked' : 'hobbyCard';
+        let className = 'breakCard';
         className += percentDone >= 1 ? 'Complete' : '';
         return className;
     }
@@ -30,18 +29,18 @@ const Hobby = (props) => {
     return (
         <div className={determineClassName()}>
             
-            <div className="hobbyHeader">
+            <div className="breakHeader">
                 
                 <div className="playAndTitle">
                     <button onClick={() => props.toggleHobbyIsActive(props.hobby._id)}>{props.hobby.isActive ? '⏹' : '▶'}</button>
-                    <div className="hobbyTitle">{props.hobby.name}</div>
+                    <div className="breakTitle">{props.hobby.name}</div>
                 </div>
                 
                 <button>✏</button>
 
             </div>
 
-            <div className="hobbyTimeBar">
+            <div className="breakTimeBar">
                 
                 <div className="entireBar">
                     <div style={progressBarStyle}></div>
@@ -64,4 +63,4 @@ const Hobby = (props) => {
     )
 }
 
-export default Hobby
+export default Break;

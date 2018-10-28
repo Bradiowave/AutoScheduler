@@ -2,6 +2,7 @@ import React from 'react';
 import './Hobbies.css';
 
 import Hobby from '../Hobby/Hobby.js';
+import Break from '../Break/Break.js';
 
 const stringToMS = (string) => {
     let timeParts = string.split(":");
@@ -70,13 +71,21 @@ const Hobbies = (props) => {
 
             {activeHobbies.map(hobby => (
                 <div key={hobby._id}>
+                    {hobby.name === "Break" ? 
+                    <Break hobby={hobby} toggleHobbyIsActive={props.toggleHobbyIsActive} />
+                    :
                     <Hobby hobby={hobby} toggleHobbyIsActive={props.toggleHobbyIsActive} />
+                    }
                 </div>
             ))}
 
             {inactiveHobbies.map(hobby => (
                 <div key={hobby._id}>
+                    {hobby.name === "Break" ? 
+                    <Break hobby={hobby} toggleHobbyIsActive={props.toggleHobbyIsActive} />
+                    :
                     <Hobby hobby={hobby} toggleHobbyIsActive={props.toggleHobbyIsActive} />
+                    }
                 </div>
             ))}
             
