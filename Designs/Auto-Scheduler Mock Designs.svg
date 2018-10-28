@@ -83,11 +83,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4142136"
-     inkscape:cx="1116.2666"
-     inkscape:cy="2238.7474"
+     inkscape:zoom="1"
+     inkscape:cx="1066.6938"
+     inkscape:cy="1680.5622"
      inkscape:document-units="px"
-     inkscape:current-layer="g1968"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:showpageshadow="false"
      borderlayer="true"
@@ -2853,7 +2853,7 @@
            sodipodi:role="line"
            dx="0">05:00:00</tspan></text>
       <rect
-         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.26458332;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.26458333;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
          id="rect2166"
          width="79.375"
          height="15.874976"
@@ -2898,6 +2898,11 @@
            x="-344.30887"
            y="-121.87394"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Dubai;-inkscape-font-specification:Dubai;letter-spacing:0px;fill:none;stroke:#000000;stroke-width:0.26458332;stroke-miterlimit:4;stroke-dasharray:none">...</tspan></text>
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 129.64583,-345.93753 v 9.26039"
+         id="path1639"
+         inkscape:connector-curvature="0" />
     </g>
     <g
        transform="translate(222.24999,281.7813)"

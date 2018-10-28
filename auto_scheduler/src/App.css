@@ -7,4 +7,6 @@
   flex-flow: column;
   align-items: center;
   background-color: white;
+  background-image: url(./resources/PolygonBackground.svg);
+  background-size: 100% 32%;
 }
