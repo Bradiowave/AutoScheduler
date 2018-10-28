@@ -3,11 +3,17 @@ import './Hobby.css';
 
 const stringToMS = (string) => {
     let timeParts = string.split(":");
-    console.log((timeParts[0]*60*60+timeParts[1]*60+timeParts[2])*1000)
     return((timeParts[0]*60*60+timeParts[1]*60+timeParts[2])*1000);
 }
 
 const Hobby = (props) => {
+
+    const determineClassName = () => {
+        const percentDone = stringToMS(props.hobby.progress) / stringToMS(props.hobby.targetTime);
+        let className = props.hobby.autoCompletes ? 'hobbyCardLocked' : 'hobbyCard';
+        className += percentDone >= 1 ? 'Complete' : '';
+        return className;
+    }
 
     const progressBarStyle = {
         backgroundColor: `${props.hobby.color}80`,
@@ -36,7 +42,7 @@ const Hobby = (props) => {
     }
 
     return (
-        <div className="hobbyCard">
+        <div className={determineClassName()}>
             
             <div className="hobbyHeader">
                 
