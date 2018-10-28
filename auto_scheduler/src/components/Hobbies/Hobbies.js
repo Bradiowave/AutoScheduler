@@ -10,41 +10,54 @@ const stringToMS = (string) => {
 
 const Hobbies = (props) => {
 
-    const populateActiveHobbies = () => {
-        let returnArray = [];
-        for (let i=0 ; i < props.hobbies.length ; i++){
-            if (props.hobbies[i].isActive) returnArray.push(props.hobbies[i])
-        }
-
+    const orderArray = (arr) => {
         function compare(a,b) {
             const aPercentDone = stringToMS(a.progress) / stringToMS(a.targetTime);
             const bPercentDone = stringToMS(b.progress) / stringToMS(b.targetTime);
+            
+            let total = aPercentDone - bPercentDone;
+            return total;
+        }
+        
+        let pureProgress = arr.sort(compare);
+        let isDueTodayArr = [];
+        let notLockedArr = [];
+        let notDueTodayArr = [];
+        let isCompleteArr = [];
+        let isLockedArr = [];
 
-            if (aPercentDone < bPercentDone) return -1;
-            if (aPercentDone > bPercentDone) return 1;
-            return 0;
+        for (let i=0 ; i < pureProgress.length ; i++){
+            const isDueToday = ( pureProgress[i].onDays.length === 1 && pureProgress[i].onDays[0] === true ) ||
+                                ( pureProgress[i].onDays.length === 7 && pureProgress[i].onDays[new Date().getDay()] );
+            const notDueToday = ( pureProgress[i].onDays.length === 7 && ( pureProgress[i].onDays[new Date().getDay()] === false ));
+            const isComplete = ( stringToMS(pureProgress[i].progress) / stringToMS(pureProgress[i].targetTime) ) >= 1;
+            
+            if (pureProgress[i].autoCompletes) isLockedArr.push(pureProgress[i]);
+            else if (isComplete) isCompleteArr.push(pureProgress[i]);
+            else if (isDueToday) isDueTodayArr.push(pureProgress[i]);
+            else if (notDueToday) notDueTodayArr.push(pureProgress[i]);
+            else notLockedArr.push(pureProgress[i])
         }
 
-         return returnArray.sort(compare);
+        return [].concat(isDueTodayArr, notLockedArr, notDueTodayArr, isCompleteArr, isLockedArr);
+    }
+
+    const populateActiveHobbies = () => {
+        let arr = [];
+        for (let i=0 ; i < props.hobbies.length ; i++){
+            if (props.hobbies[i].isActive) arr.push(props.hobbies[i])
+        }
+
+        return orderArray(arr);
     }
 
     const populateInactiveHobbies = () => {
-        let returnArray = [];
+        let arr = [];
         for (let i=0 ; i < props.hobbies.length ; i++){
-            if (props.hobbies[i].isActive === false) returnArray.push(props.hobbies[i])
+            if (props.hobbies[i].isActive === false) arr.push(props.hobbies[i])
         }
-
-        function compare(a,b) {
-            const aPercentDone = stringToMS(a.progress) / stringToMS(a.targetTime);
-            const bPercentDone = stringToMS(b.progress) / stringToMS(b.targetTime);
-
-            if (b.autoCompletes) return -2;
-            if (aPercentDone < bPercentDone) return -1;
-            if (aPercentDone > bPercentDone) return 1;
-            return 0;
-        }
-
-         return returnArray.sort(compare);
+        
+        return orderArray(arr);
     }
 
     let activeHobbies = populateActiveHobbies();
