@@ -10,16 +10,30 @@ const stringToMS = (string) => {
 const Hobby = (props) => {
 
     const progressBarStyle = {
-        backgroundColor: '#ff660080',
+        backgroundColor: `${props.hobby.color}80`,
         height: '25px',
         width: `${(stringToMS(props.hobby.progress) / stringToMS(props.hobby.targetTime)) * 100}%`,
     };
 
     const targetBarStyle = {
-        backgroundColor: '#ff660010',
+        backgroundColor: `${props.hobby.color}10`,
         height: '25px',
         width: `${(1 - stringToMS(props.hobby.progress) / stringToMS(props.hobby.targetTime)) * 100}%`,
     };
+
+    const createFrequencyText = () => {
+        const onDays = props.hobby.onDays;
+        if (onDays.length === 1) {
+            if (onDays[0]) return 'PER DAY';
+            return 'PER WEEK';
+        }
+        const days = ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'Sa'];
+        let daystring = '';
+        for (let i=0 ; i < onDays.length ; i++){
+            if (onDays[i]) daystring += `${days[i]} `;
+        }
+        return daystring;
+    }
 
     return (
         <div className="hobbyCard">
@@ -48,8 +62,7 @@ const Hobby = (props) => {
 
                     <div className="targetTimeAndFrequency">
                         <div className="targetTime">{props.hobby.targetTime}</div>
-                        <div className='frequency'>PER WEEK</div>
-                        {/* <div className='frequency'>M T W Th Sa Su</div> */}
+                        <div className='frequency'>{createFrequencyText()}</div>
                     </div>
 
                 </div>
