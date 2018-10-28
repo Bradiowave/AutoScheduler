@@ -5,7 +5,7 @@ import Hobby from '../Hobby/Hobby.js';
 
 const stringToMS = (string) => {
     let timeParts = string.split(":");
-    return((timeParts[0]*60*60+timeParts[1]*60+timeParts[2])*1000);
+    return((+timeParts[0] * (1000 * 60 * 60)) + (+timeParts[1] * 1000 * 60) + (+timeParts[2] * 1000));
 }
 
 const Hobbies = (props) => {
@@ -20,6 +20,7 @@ const Hobbies = (props) => {
         }
         
         let pureProgress = arr.sort(compare);
+        let breakArr = [];
         let isDueTodayArr = [];
         let notLockedArr = [];
         let notDueTodayArr = [];
@@ -27,19 +28,20 @@ const Hobbies = (props) => {
         let isLockedArr = [];
 
         for (let i=0 ; i < pureProgress.length ; i++){
-            const isDueToday = ( pureProgress[i].onDays.length === 1 && pureProgress[i].onDays[0] === true ) ||
+            const isDueToday = ( pureProgress[i].onDays.length === 1 && pureProgress[i].onDays[0] === 1 ) ||
                                 ( pureProgress[i].onDays.length === 7 && pureProgress[i].onDays[new Date().getDay()] );
-            const notDueToday = ( pureProgress[i].onDays.length === 7 && ( pureProgress[i].onDays[new Date().getDay()] === false ));
+            const notDueToday = ( pureProgress[i].onDays.length === 7 && ( pureProgress[i].onDays[new Date().getDay()] === 0 ));
             const isComplete = ( stringToMS(pureProgress[i].progress) / stringToMS(pureProgress[i].targetTime) ) >= 1;
             
-            if (pureProgress[i].autoCompletes) isLockedArr.push(pureProgress[i]);
+            if (pureProgress[i].name === 'Break') breakArr.push(pureProgress[i]);
+            else if (pureProgress[i].autoCompletes) isLockedArr.push(pureProgress[i]);
             else if (isComplete) isCompleteArr.push(pureProgress[i]);
             else if (isDueToday) isDueTodayArr.push(pureProgress[i]);
             else if (notDueToday) notDueTodayArr.push(pureProgress[i]);
             else notLockedArr.push(pureProgress[i]);
         }
 
-        return [].concat(isDueTodayArr, notLockedArr, notDueTodayArr, isCompleteArr, isLockedArr);
+        return [].concat(breakArr, isDueTodayArr, notLockedArr, notDueTodayArr, isCompleteArr, isLockedArr);
     }
 
     const populateActiveHobbies = () => {

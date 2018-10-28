@@ -27,20 +27,6 @@ const Hobby = (props) => {
         width: `${(1 - stringToMS(props.hobby.progress) / stringToMS(props.hobby.targetTime)) * 100}%`,
     };
 
-    const createFrequencyText = () => {
-        const onDays = props.hobby.onDays;
-        if (onDays.length === 1) {
-            if (onDays[0]) return 'PER DAY';
-            return 'PER WEEK';
-        }
-        const days = ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'Sa'];
-        let daystring = '';
-        for (let i=0 ; i < onDays.length ; i++){
-            if (onDays[i]) daystring += `${days[i]} `;
-        }
-        return daystring;
-    }
-
     return (
         <div className={determineClassName()}>
             
@@ -68,7 +54,7 @@ const Hobby = (props) => {
 
                     <div className="targetTimeAndFrequency">
                         <div className="targetTime">{props.hobby.targetTime}</div>
-                        <div className='frequency'>{createFrequencyText()}</div>
+                        <div className='frequency'>TO USE</div>
                     </div>
 
                 </div>

@@ -6,7 +6,7 @@ const HobbySchema = new mongoose.Schema({
     progress: { type: String, required: true },
     targetTime: { type: String, required: true },
     resetEvery: { type: String, required: true },
-    onDays: [Boolean],
+    onDays: [Number],
     addsToBreak: Boolean,
     isActive: Boolean,
     autoCompletes: Boolean
