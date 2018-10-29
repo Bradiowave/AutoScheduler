@@ -1,10 +1,6 @@
 import React from 'react';
+import { stringToMS } from '../../helperFunctions/helperFunctions.js';
 import './Hobby.css';
-
-const stringToMS = (string) => {
-    let timeParts = string.split(":");
-    return((+timeParts[0] * (1000 * 60 * 60)) + (+timeParts[1] * 1000 * 60) + (+timeParts[2] * 1000));
-}
 
 const Hobby = (props) => {
 

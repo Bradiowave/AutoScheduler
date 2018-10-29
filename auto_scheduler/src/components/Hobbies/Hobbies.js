@@ -1,13 +1,9 @@
 import React from 'react';
 import './Hobbies.css';
+import { stringToMS } from '../../helperFunctions/helperFunctions.js';
 
 import Hobby from '../Hobby/Hobby.js';
 import Break from '../Break/Break.js';
-
-const stringToMS = (string) => {
-    let timeParts = string.split(":");
-    return((+timeParts[0] * (1000 * 60 * 60)) + (+timeParts[1] * 1000 * 60) + (+timeParts[2] * 1000));
-}
 
 const Hobbies = (props) => {
 
@@ -72,7 +68,7 @@ const Hobbies = (props) => {
             {activeHobbies.map(hobby => (
                 <div key={hobby._id}>
                     {hobby.name === "Break" ? 
-                    <Break hobby={hobby} toggleHobbyIsActive={props.toggleHobbyIsActive} />
+                    <Break hobby={hobby} hobbies={props.hobbies} toggleHobbyIsActive={props.toggleHobbyIsActive} />
                     :
                     <Hobby hobby={hobby} toggleHobbyIsActive={props.toggleHobbyIsActive} />
                     }
@@ -82,7 +78,7 @@ const Hobbies = (props) => {
             {inactiveHobbies.map(hobby => (
                 <div key={hobby._id}>
                     {hobby.name === "Break" ? 
-                    <Break hobby={hobby} toggleHobbyIsActive={props.toggleHobbyIsActive} />
+                    <Break hobby={hobby} hobbies={props.hobbies} toggleHobbyIsActive={props.toggleHobbyIsActive} />
                     :
                     <Hobby hobby={hobby} toggleHobbyIsActive={props.toggleHobbyIsActive} />
                     }

@@ -1,27 +1,11 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
+import { initializeBreak, stringToMS, msToString }  from './helperFunctions/helperFunctions.js';
 
 import './App.css';
 
 import Hobbies from './components/Hobbies/Hobbies.js';
-
-const stringToMS = (string) => {
-  let timeParts = string.split(":");
-  return((+timeParts[0] * (1000 * 60 * 60)) + (+timeParts[1] * 1000 * 60) + (+timeParts[2] * 1000));
-}
-
-const msToString = (duration) => {
-  let seconds = parseInt((duration / 1000) % 60);
-  let minutes = parseInt((duration / (1000 * 60)) % 60);
-  let hours = parseInt((duration / (1000 * 60 * 60)));
-
-  hours = (hours < 10) ? "0" + hours : hours;
-  minutes = (minutes < 10) ? "0" + minutes : minutes;
-  seconds = (seconds < 10) ? "0" + seconds : seconds;
-
-  return hours + ":" + minutes + ":" + seconds;
-}
 
 class App extends Component {
   constructor() {
@@ -35,42 +19,18 @@ class App extends Component {
     axios.get('http://localhost:4088/api/hobbies')
       .then(hobbies => {
         this.setState({hobbies: hobbies.data});
-        this.setState(this.initializeBreak());
+        this.setState(initializeBreak(this.state));
       })
       .catch(err => {console.log(err)});
+
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    );
   }
 
-  initializeBreak () {
-    const findTargetTime = () => {
-      let totalHobbyTime = 0;
-      for (let i=0 ; i < this.state.hobbies.length ; i++) {
-        let msPerWeek = 0;
-        let obj = this.state.hobbies[i];
-        if (obj.name === "Break") continue;
-        if (obj.onDays.length === 1) {
-          if (obj.onDays[0] === 0) msPerWeek = stringToMS(obj.targetTime);
-          else msPerWeek = stringToMS(obj.targetTime) * 7;
-        }
-        else {
-          let numberOfDays = obj.onDays.reduce((accumulator, currentValue) => accumulator + currentValue);
-          msPerWeek = stringToMS(obj.targetTime) * numberOfDays;
-        }
-        totalHobbyTime += msPerWeek;
-      }
-      return (604800000 - totalHobbyTime);
-    }
-    let targetTime = findTargetTime();
-    targetTime = msToString(targetTime);
-
-    let stateCopy = Object.assign({}, this.state)
-    let index = stateCopy.hobbies.findIndex(hobby => {
-      return hobby.name === "Break";
-    })
-
-    stateCopy.hobbies[index].targetTime = targetTime;
-    console.log(stateCopy.hobbies[index]);
-
-    return stateCopy;
+  componentWillUnmount() {
+    clearInterval(this.timerID);
   }
 
   toggleHobbyIsActive = (hobby_id) => {
@@ -79,7 +39,33 @@ class App extends Component {
     })
     let stateCopy = Object.assign({}, this.state)
     stateCopy.hobbies[index].isActive = !stateCopy.hobbies[index].isActive;
+    let allHobbiesInactive = true;
+    for (let i=0 ; i < stateCopy.hobbies.length ; i++) {
+      if (stateCopy.hobbies[i].isActive === true && 
+          stateCopy.hobbies[i].name !== "Break" &&
+          stringToMS(stateCopy.hobbies[i].progress) / stringToMS(stateCopy.hobbies[i].targetTime) < 1
+        ){
+        allHobbiesInactive = false;
+        break;
+      }
+    }
+    let breakIndex = this.state.hobbies.findIndex(obj => {
+      return obj.name === "Break";
+    })
+    stateCopy.hobbies[breakIndex].isActive = allHobbiesInactive;
+
     this.setState(stateCopy);
+  }
+
+  tick() {
+    for (let i=0 ; i < this.state.hobbies.length ; i++) {
+      let hobby = this.state.hobbies[i];
+      if (hobby.isActive){
+        let stateCopy = Object.assign({}, this.state)
+        stateCopy.hobbies[i].progress = msToString( stringToMS(hobby.progress) + 1000 );
+        this.setState(stateCopy);
+      }
+    }
   }
 
   render() {

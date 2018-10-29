@@ -1,10 +1,7 @@
 import React from 'react';
+import { stringToMS, msToString } from '../../helperFunctions/helperFunctions.js';
 import './Break.css';
 
-const stringToMS = (string) => {
-    let timeParts = string.split(":");
-    return((+timeParts[0] * (1000 * 60 * 60)) + (+timeParts[1] * 1000 * 60) + (+timeParts[2] * 1000));
-}
 
 const Break = (props) => {
     const determineClassName = () => {
@@ -14,16 +11,31 @@ const Break = (props) => {
         return className;
     }
 
+    const calculateBreakTime = () => {
+        let hobbies = props.hobbies;
+        let totalProgress = 0;
+        let totalTarget = 0;
+        
+        for (let i=0 ; i < hobbies.length ; i++){
+            if (hobbies[i].addsToBreak) {
+                totalProgress += Math.min(stringToMS(hobbies[i].progress), stringToMS(hobbies[i].targetTime));
+                totalTarget += stringToMS(hobbies[i].targetTime);
+            }
+        }
+
+        return msToString( ( stringToMS(props.hobby.targetTime) * (totalProgress / totalTarget) ) - stringToMS(props.hobby.progress) );
+    }
+
     const progressBarStyle = {
         backgroundColor: `${props.hobby.color}80`,
         height: '25px',
-        width: `${(stringToMS(props.hobby.progress) / stringToMS(props.hobby.targetTime)) * 100}%`,
+        width: `${(stringToMS(calculateBreakTime()) / stringToMS("00:30:00")) * 100}%`,
     };
 
     const targetBarStyle = {
         backgroundColor: `${props.hobby.color}10`,
         height: '25px',
-        width: `${(1 - stringToMS(props.hobby.progress) / stringToMS(props.hobby.targetTime)) * 100}%`,
+        width: `${(1 - stringToMS(calculateBreakTime()) / stringToMS("00:30:00")) * 100}%`,
     };
 
     return (
@@ -52,7 +64,7 @@ const Break = (props) => {
                     <div className="progressTime">{props.hobby.progress}</div>
 
                     <div className="targetTimeAndFrequency">
-                        <div className="targetTime">{props.hobby.targetTime}</div>
+                        <div className="targetTime">{calculateBreakTime()}</div>
                         <div className='frequency'>TO USE</div>
                     </div>
 
