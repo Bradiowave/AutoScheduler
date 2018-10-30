@@ -1,0 +1,108 @@
+.hobbyCard{
+    width: 300px;
+    height: 60px;
+    margin-top: 15px;
+    background-color: #ffffff80;
+    display: flex;
+    flex-flow: column;
+    border: solid black 1px;
+    border-radius: 2px;
+}
+
+.hobbyCardComplete{
+    width: 300px;
+    height: 60px;
+    margin-top: 15px;
+    background-color: #ffffff80;
+    display: flex;
+    flex-flow: column;
+    border: solid black 1px;
+    border-radius: 2px;
+    box-shadow:
+        0 0 0 2px white,
+        0 0 0 3px black;
+}
+
+.hobbyCardLocked{
+    width: 300px;
+    height: 60px;
+    margin-top: 15px;
+    color: white;
+    background-color: #000000CC;
+    display: flex;
+    flex-flow: column;
+    border: solid black 1px;
+    border-radius: 2px;
+    
+}
+
+.hobbyCardLockedComplete{
+    width: 300px;
+    height: 60px;
+    margin-top: 15px;
+    color: white;
+    background-color: #000000CC;
+    display: flex;
+    flex-flow: column;
+    border: solid black 1px;
+    border-radius: 2px;
+    box-shadow:
+        0 0 0 2px white,
+        0 0 0 3px black;
+}
+
+    .hobbyHeader{
+        display: flex;
+        justify-content: space-between;
+        height: 35px;
+    }
+
+        .playAndTitle{
+            display: flex;
+        }
+
+            .hobbyTitle{
+                align-self: center;
+                font-size: 2.2rem;
+                padding-top: 5px;
+                z-index: 1;
+            }
+
+    .hobbyTimeBar{
+        display: flex;
+        flex-direction: column;
+        height: 25px;
+    }
+
+        .entireBar{
+            display: flex;
+        }
+
+        .barInfo{
+            display: flex;
+            justify-content: space-between;
+        }
+
+            .progressTime{
+                font-size: 1.3rem;
+                margin: -15px 0 0 4px;
+            }
+
+            .targetTimeAndFrequency{
+                display: flex;
+                align-items: center;
+            }
+
+                .targetTime{
+                    font-size: 1.3rem;
+                    margin: -7px 3px 0 0;
+                }
+
+                .frequency{
+                    width: 36px;
+                    margin: -8px 3px 0 0;
+                    font-size: .6rem;
+                    font-weight: bolder;
+                    line-height: 1;
+                    text-align: center;
+                }
