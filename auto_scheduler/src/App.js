@@ -13,6 +13,14 @@ class App extends Component {
     this.state = {
       hobbies: []
     }
+    this.updateDatabase = this.updateDatabase.bind(this);
+  }
+
+  updateDatabase () {
+    for (let i=0 ; i < this.state.hobbies.length ; i++) {
+      let hobby = this.state.hobbies[i];
+      axios.put(`http://localhost:4088/api/hobbies/${hobby._id}`, hobby)
+    }
   }
 
   componentDidMount () {
@@ -27,10 +35,14 @@ class App extends Component {
       () => this.tick(),
       1000
     );
+
+    window.addEventListener('beforeunload', this.updateDatabase);
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     clearInterval(this.timerID);
+    this.updateDatabase();
+    window.removeEventListener('beforeunload', this.updateDatabase);
   }
 
   toggleHobbyIsActive = (hobby_id) => {
@@ -68,10 +80,16 @@ class App extends Component {
         stateCopy.hobbies[i].weeklyProgress = msToString( stringToMS(hobby.weeklyProgress) + 1000 );
       }
 
-      //Reset hobby.progress if msSinceMonday % (hobby.resetEvery + hobby.resetAt) === 0;
+      //Reset hobby.progress if msSinceMonday % hobby.resetEvery === hobby.resetAt.
+      //(resetEvery must be a day or a week).
       if ( roundMSSinceMonday % stringToMS(hobby.resetEvery) === stringToMS(hobby.resetAt)  ) {
         stateCopy.hobbies[i].progress = msToString(0);
       }
+
+      //if it is the start of the week, reset weeklyProgress
+      if (roundMSSinceMonday === 0) stateCopy.hobbies[i].weeklyProgress = "00:00:00";
+
+      //update this.state
       this.setState(stateCopy);
     }
   }
