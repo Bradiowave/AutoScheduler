@@ -23,6 +23,24 @@ export const msToString = (duration) => {
     return sign + hours + ":" + minutes + ":" + seconds;
 }
 
+export const getMillisecondsToMonday = () => {
+  let now = new Date();
+  let offsetDays = ( ( ( 7 - now.getDay() ) % 7 ) + 1 );
+
+  let nextMonday = new Date(now.getFullYear(), now.getMonth(), now.getDate()+offsetDays);
+
+  return nextMonday - now;
+};
+
+export const getMillisecondsSinceMonday = () => {
+  let now = new Date();
+  let offsetDays = ( ( ( 7 - now.getDay() ) % 7 ) - 6 );
+
+  let thisLastMonday = new Date(now.getFullYear(), now.getMonth(), now.getDate()+offsetDays);
+
+  return now - thisLastMonday;
+};
+
 //========== App.js Helpers ==========//
 
 export const initializeBreak = (state) => {
