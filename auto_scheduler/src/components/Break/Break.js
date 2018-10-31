@@ -20,6 +20,25 @@ const Break = (props) => {
             if (hobbies[i].addsToBreak) {
                 totalProgress += Math.min(stringToMS(hobbies[i].progress), stringToMS(hobbies[i].targetTime));
                 totalTarget += stringToMS(hobbies[i].targetTime);
+
+                if (hobbies[i].onDays.length === 1) {
+                    if (hobbies[i].onDays[0] === 0) {
+                        totalProgress += Math.min(stringToMS(hobbies[i].progress), stringToMS(hobbies[i].targetTime));
+                        totalTarget += stringToMS(hobbies[i].targetTime);
+                    }
+                    else {
+                        totalProgress += Math.min(stringToMS(hobbies[i].weeklyProgress), stringToMS(hobbies[i].targetTime) * 7);
+                        totalTarget += stringToMS(hobbies[i].targetTime) * 7;
+                    }
+                }
+                else {
+                    let numberOfDays = hobbies[i].onDays.reduce((accumulator, currentValue) => accumulator + currentValue);
+                    let numberOfDaysPast = hobbies[i].onDays.reduce((accumulator, currentValue, currentIndex) => {
+                        return accumulator + (currentIndex <= new Date().getDay()+1 ? currentValue : 0);
+                    });
+                    totalProgress += Math.min(stringToMS(hobbies[i].weeklyProgress), stringToMS(hobbies[i].targetTime) * numberOfDaysPast);
+                    totalTarget += stringToMS(hobbies[i].targetTime) * numberOfDays;
+                }
             }
         }
 
@@ -44,7 +63,7 @@ const Break = (props) => {
             <div className="breakHeader">
                 
                 <div className="playAndTitle">
-                    <button onClick={() => props.toggleHobbyIsActive(props.hobby._id)}>{props.hobby.isActive ? '⏹' : '▶'}</button>
+                    <button onClick={() => props.toggleHobbyIsActive(props.hobby._id)}>{props.hobby.isActive ? '🚫' : '🚫'}</button>
                     <div className="breakTitle">{props.hobby.name}</div>
                 </div>
                 
