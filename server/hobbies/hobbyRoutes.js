@@ -6,7 +6,7 @@ const Hobbies = require('./hobbyModel.js');
 router.route('/')
     .post((req, res) => {
         const newHobby = (new Hobbies(
-            { name, color, progress, weeklyProgress, targetTime, resetEvery, onDays, addsToBreak, isActive, autoCompletes }
+            { name, color, progress, weeklyProgress, targetTime, resetEvery, resetAt, onDays, addsToBreak, isActive, autoCompletes }
             = req.body ));
 
         newHobby.save()
@@ -67,7 +67,7 @@ router.route('/:id')
     .put((req, res) => {
         const { id } = req.params;
         const newHobby = ( 
-            { name, color, progress, weeklyProgress, targetTime, resetEvery, onDays, addsToBreak, isActive, autoCompletes }
+            { name, color, progress, weeklyProgress, targetTime, resetEvery, resetAt, onDays, addsToBreak, isActive, autoCompletes }
             = req.body );
         Hobbies.findByIdAndUpdate(id, newHobby, {new: true})
             .then(hobby => {

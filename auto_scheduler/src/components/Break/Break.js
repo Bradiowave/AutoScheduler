@@ -18,9 +18,6 @@ const Break = (props) => {
         
         for (let i=0 ; i < hobbies.length ; i++){
             if (hobbies[i].addsToBreak) {
-                totalProgress += Math.min(stringToMS(hobbies[i].progress), stringToMS(hobbies[i].targetTime));
-                totalTarget += stringToMS(hobbies[i].targetTime);
-
                 if (hobbies[i].onDays.length === 1) {
                     if (hobbies[i].onDays[0] === 0) {
                         totalProgress += Math.min(stringToMS(hobbies[i].progress), stringToMS(hobbies[i].targetTime));

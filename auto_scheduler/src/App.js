@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
-import { initializeBreak, stringToMS, msToString }  from './helperFunctions/helperFunctions.js';
+import { initializeBreak, stringToMS, msToString, getMillisecondsSinceMonday }  from './helperFunctions/helperFunctions.js';
 
 import './App.css';
 
@@ -58,13 +58,21 @@ class App extends Component {
   }
 
   tick() {
+    let roundMSSinceMonday = getMillisecondsSinceMonday() - (getMillisecondsSinceMonday() % 1000);
+
     for (let i=0 ; i < this.state.hobbies.length ; i++) {
       let hobby = this.state.hobbies[i];
+      let stateCopy = Object.assign({}, this.state)
       if (hobby.isActive){
-        let stateCopy = Object.assign({}, this.state)
         stateCopy.hobbies[i].progress = msToString( stringToMS(hobby.progress) + 1000 );
-        this.setState(stateCopy);
+        stateCopy.hobbies[i].weeklyProgress = msToString( stringToMS(hobby.weeklyProgress) + 1000 );
       }
+
+      //Reset hobby.progress if msSinceMonday % (hobby.resetEvery + hobby.resetAt) === 0;
+      if ( roundMSSinceMonday % stringToMS(hobby.resetEvery) === stringToMS(hobby.resetAt)  ) {
+        stateCopy.hobbies[i].progress = msToString(0);
+      }
+      this.setState(stateCopy);
     }
   }
 
