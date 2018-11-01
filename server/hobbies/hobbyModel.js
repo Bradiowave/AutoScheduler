@@ -10,8 +10,7 @@ const HobbySchema = new mongoose.Schema({
     resetAt: String,
     onDays: [Number],
     addsToBreak: Boolean,
-    isActive: Boolean,
-    autoCompletes: Boolean
+    isActive: Boolean
 });
 
 module.exports = mongoose.model('Hobby', HobbySchema);
