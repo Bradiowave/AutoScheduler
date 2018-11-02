@@ -60,7 +60,7 @@ const Break = (props) => {
             <div className="breakHeader">
                 
                 <div className="playAndTitle">
-                    <button onClick={() => props.toggleHobbyIsActive(props.hobby._id)}>{props.hobby.isActive ? '🚫' : '🚫'}</button>
+                    <button onClick={() => props.toggleHobbyIsActive(props.hobby._id)}>{props.hobby.isActive ? '🔒' : '◀'}</button>
                     <div className="breakTitle">{props.hobby.name}</div>
                 </div>
                 

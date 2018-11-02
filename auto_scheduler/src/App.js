@@ -53,12 +53,12 @@ class App extends Component {
     stateCopy.hobbies[index].isActive = !stateCopy.hobbies[index].isActive;
     let allHobbiesInactive = true;
     for (let i=0 ; i < stateCopy.hobbies.length ; i++) {
-      if (stateCopy.hobbies[i].isActive === true && 
-          stateCopy.hobbies[i].name !== "Break" &&
-          stringToMS(stateCopy.hobbies[i].progress) / stringToMS(stateCopy.hobbies[i].targetTime) < 1
-        ){
-        allHobbiesInactive = false;
-        break;
+      if (stateCopy.hobbies[i].isActive === true && stringToMS(stateCopy.hobbies[i].progress) / stringToMS(stateCopy.hobbies[i].targetTime) < 1){
+        if (stateCopy.hobbies[i].name !== "Break" && stateCopy.hobbies[i].name !== stateCopy.hobbies[index].name){
+          stateCopy.hobbies[i].isActive = false;
+        } else if (stateCopy.hobbies[i].name !== "Break") {
+          allHobbiesInactive = false;
+        }
       }
     }
     let breakIndex = this.state.hobbies.findIndex(obj => {
