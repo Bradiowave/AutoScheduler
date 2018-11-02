@@ -2,7 +2,6 @@ import React from 'react';
 import { stringToMS, msToString } from '../../helperFunctions/helperFunctions.js';
 import './Break.css';
 
-
 const Break = (props) => {
     const determineClassName = () => {
         const percentDone = stringToMS(props.hobby.progress) / stringToMS(props.hobby.targetTime);

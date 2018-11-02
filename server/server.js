@@ -6,6 +6,7 @@ let dotenv = require ('dotenv');
 dotenv.load();
 
 const hobbyRoutes = require('./hobbies/hobbyRoutes.js');
+const userRoutes = require('./users/userRoutes.js');
 
 const server = express();
 
@@ -18,13 +19,14 @@ server.get('/', (req, res) => {
 });
 
 server.use('/api/hobbies', hobbyRoutes);
+server.use('/api/users', userRoutes);
 
 const port = process.env.PORT || 5000;
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/dbHobbies', { useNewUrlParser: true }, (error) => {
+mongoose.connect('mongodb://localhost/autoSchedulerDB', { useNewUrlParser: true }, (error) => {
     if (error) console.log(error);
-    else console.log('Mongoose connected us to dbHobbies');
+    else console.log('Mongoose connected us to autoSchedulerDB');
 });
 
 server.listen(port, () => console.log(`\n=== API running on port: ${port} ===\n`));
