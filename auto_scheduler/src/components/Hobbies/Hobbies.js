@@ -19,10 +19,10 @@ const Hobbies = (props) => {
         let pureProgress = arr.sort(compare);
         let breakArr = [];
         let isDueTodayArr = [];
-        let notLockedArr = [];
+        let addsToBreakArr = [];
         let notDueTodayArr = [];
         let isCompleteArr = [];
-        let isLockedArr = [];
+        let notAddsToBreakArr = [];
 
         for (let i=0 ; i < pureProgress.length ; i++){
             const isDueToday = ( pureProgress[i].onDays.length === 1 && pureProgress[i].onDays[0] === 1 ) ||
@@ -31,14 +31,14 @@ const Hobbies = (props) => {
             const isComplete = ( stringToMS(pureProgress[i].progress) / stringToMS(pureProgress[i].targetTime) ) >= 1;
             
             if (pureProgress[i].name === 'Break') breakArr.push(pureProgress[i]);
-            else if (pureProgress[i].autoCompletes) isLockedArr.push(pureProgress[i]);
+            else if (!pureProgress[i].addsToBreak) notAddsToBreakArr.push(pureProgress[i]);
             else if (isComplete) isCompleteArr.push(pureProgress[i]);
             else if (isDueToday) isDueTodayArr.push(pureProgress[i]);
             else if (notDueToday) notDueTodayArr.push(pureProgress[i]);
-            else notLockedArr.push(pureProgress[i]);
+            else addsToBreakArr.push(pureProgress[i]);
         }
 
-        return [].concat(breakArr, isDueTodayArr, notLockedArr, notDueTodayArr, isCompleteArr, isLockedArr);
+        return [].concat(breakArr, isDueTodayArr, addsToBreakArr, notDueTodayArr, isCompleteArr, notAddsToBreakArr);
     }
 
     const populateActiveHobbies = () => {

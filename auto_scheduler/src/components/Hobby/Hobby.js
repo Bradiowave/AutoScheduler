@@ -6,7 +6,7 @@ const Hobby = (props) => {
 
     const determineClassName = () => {
         const percentDone = stringToMS(props.hobby.progress) / stringToMS(props.hobby.targetTime);
-        let className = props.hobby.autoCompletes ? 'hobbyCardLocked' : 'hobbyCard';
+        let className = props.hobby.addsToBreak ? 'hobbyCard' : 'hobbyCardLocked';
         className += percentDone >= 1 ? 'Complete' : '';
         return className;
     }
